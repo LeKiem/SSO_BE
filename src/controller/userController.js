@@ -2,7 +2,7 @@ import userApiService from "../service/userApiService";
 const readFunc = async (req, res) => {
   try {
     if (req.query.page && req.query.limit) {
-      console.log(req.query);
+      // console.log(req.query);
       let page = req.query.page;
       let limit = req.query.limit;
       let data = await userApiService.getUserWithPagination(+page, +limit);

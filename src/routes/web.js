@@ -1,6 +1,7 @@
 import express from "express";
 import HomeController from "../controller/homeController";
 import apiController from "../controller/apiController";
+import loginController from "../controller/loginController";
 const router = express.Router();
 
 const initWebRouters = (app) => {
@@ -12,6 +13,8 @@ const initWebRouters = (app) => {
   router.post("/users/update-user", HomeController.handleUpdateUser);
 
   router.get("/api/test-api", apiController.testApi);
+
+  router.get("/login", loginController.getLoginPage);
   return app.use("/", router);
 };
 
