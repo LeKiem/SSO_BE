@@ -2,6 +2,8 @@ import express from "express";
 import HomeController from "../controller/homeController";
 import apiController from "../controller/apiController";
 import loginController from "../controller/loginController";
+import passport from "passport";
+
 const router = express.Router();
 
 const initWebRouters = (app) => {
@@ -15,6 +17,13 @@ const initWebRouters = (app) => {
   router.get("/api/test-api", apiController.testApi);
 
   router.get("/login", loginController.getLoginPage);
+  router.post(
+    "/login",
+    passport.authenticate("local", {
+      successRedirect: "/",
+      failureRedirect: "/login",
+    })
+  );
   return app.use("/", router);
 };
 
