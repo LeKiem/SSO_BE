@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 8080;
 
 //Config Cors
 configCors(app);
+connection();
 
 configViewEngine(app);
 
@@ -20,8 +21,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-
-connection();
 
 //test jwt
 // createJWT();
