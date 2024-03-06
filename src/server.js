@@ -8,6 +8,7 @@ import bodyParser from "body-parser";
 import connection from "./config/connectDB";
 import cookieParser from "cookie-parser";
 import { configPassport } from "./controller/passportController";
+import configSession from "./config/session";
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -21,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-
+configSession(app);
 //test jwt
 // createJWT();
 // let decodeData = verifyToken(
