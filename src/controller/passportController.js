@@ -23,6 +23,15 @@ const configPassport = () => {
   );
 };
 
+const handleLogout = (req, res, next) => {
+  // req.logout();
+  // res.redirect("/");
+  req.session.destroy(function (err) {
+    res.redirect("/");
+  });
+};
+
 module.exports = {
   configPassport,
+  handleLogout,
 };
