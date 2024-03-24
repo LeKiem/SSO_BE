@@ -9,8 +9,12 @@ import connection from "./config/connectDB";
 import cookieParser from "cookie-parser";
 import { configPassport } from "./controller/passportController";
 import configSession from "./config/session";
+import flash from "connect-flash";
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+//config flass
+app.use(flash());
 
 //Config Cors
 configCors(app);

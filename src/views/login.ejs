@@ -25,22 +25,29 @@
   <body>
     <div class="container">
       <div class="row">
+        <!-- <%= error %> -->
         <form action="/login" method="post">
           <div class="login-container col-6 mx-auto center">
             <fieldset class="border rounded-3 p-3">
               <legend class="float-none w-auto pc-3">Login</legend>
+              <% if(error != '') { %>
+              <div class="alert alert-danger my-1" role="alert">
+                <%= error %>
+              </div>
+              <% } else { %> <% } %>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label"
-                  >Email address</label
+                  >username</label
                 >
 
                 <div class="input-group has-validation">
                   <input
                     type="text"
                     name="username"
-                    class="form-control is-invalid"
+                    class="form-control"
+                    value="<%= usernameInput %>"
                   />
-                  <div class="invalid-feedback">please</div>
+                  <div class="invalid-feedback">please choose a username</div>
                 </div>
               </div>
               <div class="mb-3">
@@ -48,11 +55,7 @@
                   >Password</label
                 >
                 <div class="input-group has-validation">
-                  <input
-                    type="password"
-                    class="form-control is-invalid"
-                    name="password"
-                  />
+                  <input type="password" class="form-control" name="password" />
                   <div class="invalid-feedback">please</div>
                 </div>
               </div>
