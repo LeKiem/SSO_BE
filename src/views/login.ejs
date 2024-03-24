@@ -33,13 +33,28 @@
                 <label for="exampleInputEmail1" class="form-label"
                   >Email address</label
                 >
-                <input type="email" name="username" class="form-control" />
+
+                <div class="input-group has-validation">
+                  <input
+                    type="text"
+                    name="username"
+                    class="form-control is-invalid"
+                  />
+                  <div class="invalid-feedback">please</div>
+                </div>
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label"
                   >Password</label
                 >
-                <input type="password" class="form-control" name="password" />
+                <div class="input-group has-validation">
+                  <input
+                    type="password"
+                    class="form-control is-invalid"
+                    name="password"
+                  />
+                  <div class="invalid-feedback">please</div>
+                </div>
               </div>
 
               <button type="submit" class="btn btn-primary">Login</button>
