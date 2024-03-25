@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { Op } from "sequelize";
 import { getGroupWithRole } from "./JWTService";
 import { createJWT } from "../middleware/JWTActions";
+import { v4 as uuidv4 } from "uuid";
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -90,22 +91,24 @@ const handleUserLogin = async (rawData) => {
       // console.log("Found user with email/phone");
       let isCorrectPassword = checkPassword(rawData.password, user.password);
       if (isCorrectPassword === true) {
-        let groupWithRoles = await getGroupWithRole(user);
-        let payload = {
-          email: user.email,
-          groupWithRoles,
-          username: user.username,
-        };
+        const code = uuidv4();
+        // let groupWithRoles = await getGroupWithRole(user);
+        // let payload = {
+        //   email: user.email,
+        //   groupWithRoles,
+        //   username: user.username,
+        // };
 
-        let token = createJWT(payload);
+        // let token = createJWT(payload);
         return {
           EM: "OK",
           EC: 0,
           DT: {
-            access_token: token,
-            groupWithRoles,
-            email: user.email,
-            username: user.username,
+            code: code,
+            // access_token: token,
+            // groupWithRoles,
+            // email: user.email,
+            // username: user.username,
           },
         };
       }
