@@ -26,7 +26,7 @@ const initWebRouters = (app) => {
   //     failureRedirect: "/login",
   //   })
   // );
-  app.post("/login", function (req, res, next) {
+  router.post("/login", function (req, res, next) {
     passport.authenticate("local", function (error, user, info) {
       if (error) {
         return res.status(500).json(error);
@@ -44,6 +44,7 @@ const initWebRouters = (app) => {
     })(req, res, next);
   });
   router.post("/logout", passController.handleLogout);
+  router.post("/verify-token", loginController.verifySSOToken);
   return app.use("/", router);
 };
 
