@@ -40,13 +40,16 @@ const checkUserJWT = (req, res, next) => {
 
   let cookies = req.cookies;
   const tokenFromHeader = extractToken(req);
-  if ((cookies && cookies.jwt) || tokenFromHeader) {
-    let token = cookies && cookies.jwt ? cookies.jwt : tokenFromHeader;
-    let decode = verifyToken(token);
+  if ((cookies && cookies.access_token) || tokenFromHeader) {
+    let access_token =
+      cookies && cookies.access_token ? cookies.access_token : tokenFromHeader;
+    let decode = verifyToken(access_token);
 
     if (decode) {
+      decode.access_token = access_token;
+      decode.refresh_token = cookies.refresh_token;
       req.user = decode;
-      req.token = token;
+      // req.access_token = access_token;
       next();
     } else {
       return res.status(401).json({
