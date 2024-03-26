@@ -39,7 +39,7 @@
         success: function (data) {
           // console.log(">>>check data")
           $('#flashMsg').addClass("none-flash");
-          const redirectURL = `${data.redirectURL}?ssoToken=${data.code}`
+          const redirectURL = `${data.redirectURL}/code?ssoToken=${data.code}`
           window.location.href = redirectURL
 
         },
