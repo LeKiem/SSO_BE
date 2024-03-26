@@ -81,17 +81,19 @@ const deleteFunc = async (req, res) => {
   }
 };
 const getUserAccount = async (req, res) => {
-  return res.status(200).json({
-    EM: "OK",
-    EC: 0, //
-    DT: {
-      access_token: req.user.access_token,
-      refresh_token: req.user.refresh_token,
-      groupWithRoles: req.user.groupWithRoles,
-      email: req.user.email,
-      username: req.user.username,
-    },
-  });
+  setTimeout(() => {
+    return res.status(200).json({
+      EM: "OK",
+      EC: 0, //
+      DT: {
+        access_token: req.user.access_token,
+        refresh_token: req.user.refresh_token,
+        groupWithRoles: req.user.groupWithRoles,
+        email: req.user.email,
+        username: req.user.username,
+      },
+    });
+  }, 5000);
 };
 module.exports = {
   readFunc,
