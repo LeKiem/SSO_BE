@@ -3,7 +3,11 @@ import express from "express";
 import apiController from "../controller/apiController";
 import userController from "../controller/userController";
 import groupController from "../controller/groupController";
-import { checkUserJWT, checkuserpermission } from "../middleware/JWTActions";
+import {
+  checkUserJWT,
+  checkuserpermission,
+  checkServiceJWT,
+} from "../middleware/JWTActions";
 import roleController from "../controller/roleController";
 const router = express.Router();
 const testMiddleware = (req, res, next) => {
@@ -22,6 +26,7 @@ const initApiRouters = (app) => {
   // router.get("/test-api", apiController.testApi);
 
   router.all("*", checkUserJWT, checkuserpermission);
+  router.post("/verify-services-jw", checkServiceJWT);
   router.post("/register", apiController.handleRegister);
   router.post("/login", apiController.handleLogin);
   router.post("/logout", apiController.handleLogout);

@@ -103,9 +103,39 @@ const checkuserpermission = (req, res, next) => {
     });
   }
 };
+
+const checkServiceJWT = (req, res, next) => {
+  let tokenFromHeader = extractToken(req);
+  // console.log(">>>> check token", tokenFromHeader);
+  if (tokenFromHeader) {
+    let access_token = tokenFromHeader;
+    // axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+    // let resAPI = await axios.post(process.env.API_SSO_VERIFY_ACCESS_TOKEN);
+    let decode = verifyToken(access_token);
+    if (decode) {
+      res.status(200).json({
+        EC: 0,
+        DT: "",
+        EM: "Verify the user",
+      });
+    } else
+      res.status(401).json({
+        EC: -1,
+        DT: "",
+        EM: "Not authenticated the user",
+      });
+  } else {
+    return res.status(400).json({
+      EC: -1,
+      DT: "",
+      EM: "Not authenticated the use",
+    });
+  }
+};
 module.exports = {
   createJWT,
   verifyToken,
   checkUserJWT,
   checkuserpermission,
+  checkServiceJWT,
 };
