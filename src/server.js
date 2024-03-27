@@ -10,6 +10,7 @@ import cookieParser from "cookie-parser";
 import { configPassport } from "./controller/passportController";
 import configSession from "./config/session";
 import flash from "connect-flash";
+import configLoginWithGoogle from "./controller/social/GoogleController";
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -42,6 +43,7 @@ app.use((req, res) => {
 });
 
 configPassport();
+configLoginWithGoogle();
 app.listen(PORT, () => {
   console.log("JWT Backend is running on the port = " + PORT);
 });

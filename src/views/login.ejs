@@ -26,10 +26,10 @@
   $(document).ready(function () {
     $("#btnLogin").on("click", function () {
       // alert("hi");
-      const username = $('#username').val();
-      const password = $('#password').val();
+      const username = $("#username").val();
+      const password = $("#password").val();
       const serviceURL = $("#redirectURL").val();
-      $('#flashMsg').empty("");
+      $("#flashMsg").empty("");
 
       $.ajax({
         type: "POST",
@@ -38,17 +38,16 @@
         withCredentials: true,
         success: function (data) {
           // console.log(">>>check data")
-          $('#flashMsg').addClass("none-flash");
-          const redirectURL = `${data.redirectURL}/code?ssoToken=${data.code}`
-          window.location.href = redirectURL
-
+          $("#flashMsg").addClass("none-flash");
+          const redirectURL = `${data.redirectURL}/code?ssoToken=${data.code}`;
+          window.location.href = redirectURL;
         },
         error: function (request, status, error) {
-          $('#password').val("");
-          $('#flashMsg').removeClass("none-flash")
-          $('#flashMsg').append(request.responseText)
-        }
-      })
+          $("#password").val("");
+          $("#flashMsg").removeClass("none-flash");
+          $("#flashMsg").append(request.responseText);
+        },
+      });
     });
   });
 </script>
@@ -60,8 +59,7 @@
       <div class="login-container col-6 mx-auto center">
         <fieldset class="border rounded-3 p-3">
           <legend class="float-none w-auto pc-3">Login</legend>
-          <div class="alert alert-danger my-1 none-flash" role="alert" id="flashMsg">
-          </div>
+          <div class="alert alert-danger my-1 none-flash" role="alert" id="flashMsg"></div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">username</label>
 
@@ -87,8 +85,12 @@
               <span>Login with: </span>
             </div>
             <div class="d-flex justify-content-center m-3">
-              <i class="bi bi-facebook display-6 p-2" style="color: blue"></i>
-              <i class="bi bi-google display-6 p-2" style="color: rgb(0, 213, 255)"></i>
+              <a href="/auth/google">
+                <i class="bi bi-google display-6 p-2" style="color: rgb(0, 213, 255)"></i>
+              </a>
+              <a>
+                <i class="bi bi-facebook display-6 p-2" style="color: blue"></i>
+              </a>
             </div>
           </div>
         </fieldset>
