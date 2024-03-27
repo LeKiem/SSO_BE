@@ -57,6 +57,21 @@ const initWebRouters = (app) => {
       return res.render("social.ejs", { ssoToken: req.user.code });
     }
   );
+
+  // router.get("/auth/facebook", passport.authenticate("facebook"));
+  router.get(
+    "/auth/facebook",
+    passport.authorize("facebook", { scope: ["email"] })
+  );
+
+  router.get(
+    "/facebook/redirect",
+    passport.authenticate("facebook", { failureRedirect: "/login" }),
+    function (req, res) {
+      // Successful authentication, redirect home.
+      return res.render("social.ejs", { ssoToken: req.user.code });
+    }
+  );
   return app.use("/", router);
 };
 

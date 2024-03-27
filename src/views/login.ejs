@@ -57,6 +57,13 @@
 
       window.location.href = "/auth/google"
     })
+    $("#iconFacebook").on("click", function () {
+      // alert("me")
+      localStorage.removeItem("clientURL");
+      localStorage.setItem("clientURL", $("#redirectURL").val())
+
+      window.location.href = "/auth/facebook"
+    })
   });
 </script>
 
