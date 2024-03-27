@@ -54,9 +54,7 @@ const initWebRouters = (app) => {
     "/google/redirect",
     passport.authenticate("google", { failureRedirect: "/login" }),
     function (req, res) {
-      // Successful authentication, redirect home.
-      console.log(">>> check user", req.user);
-      res.redirect("/");
+      return res.render("social.ejs", { ssoToken: req.user.code });
     }
   );
   return app.use("/", router);
