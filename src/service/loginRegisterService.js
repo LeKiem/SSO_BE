@@ -12,7 +12,6 @@ const hashUserPassword = (userPassword) => {
   let hashPassword = bcrypt.hashSync(userPassword, salt);
   return hashPassword;
 };
-
 const checkEmailExits = async (userEmail) => {
   let user = await db.User.findOne({
     where: { email: userEmail },
@@ -33,7 +32,6 @@ const checkPhoneExits = async (userPhone) => {
   }
   return false;
 };
-
 const registerNewUser = async (rawUserData) => {
   try {
     // check email/ phoneNumber are exist
@@ -74,7 +72,6 @@ const registerNewUser = async (rawUserData) => {
     };
   }
 };
-
 const checkPassword = (inputPassword, hashPassword) => {
   return bcrypt.compareSync(inputPassword, hashPassword); // true
 };
@@ -194,6 +191,28 @@ const upsertUserSocialMedia = async (typeAcc, dataRaw) => {
   }
 };
 
+const getUserByRefreshToken = async (token) => {
+  try {
+    let user = await db.User.findOne({
+      where: {
+        refreshToken: token,
+      },
+    });
+
+    if (user) {
+      let groupWithRoles = await getGroupWithRole(user);
+      return {
+        email: user.email,
+        groupWithRoles: groupWithRoles,
+        username: user.username,
+      };
+    }
+
+    return null;
+  } catch (error) {
+    console.log(error);
+  }
+};
 module.exports = {
   registerNewUser,
   handleUserLogin,
@@ -202,4 +221,5 @@ module.exports = {
   checkPhoneExits,
   updateUserRefreshToken,
   upsertUserSocialMedia,
+  getUserByRefreshToken,
 };
